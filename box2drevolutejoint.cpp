@@ -88,29 +88,42 @@ void Box2DRevoluteJoint::setEnableLimit(bool enableLimit)
     emit enableLimitChanged();
 }
 
-void Box2DRevoluteJoint::setLowerAngle(float lowerAngle)
+void Box2DRevoluteJoint::setLimits(float lowerAngle, float upperAngle)
 {
-    if (m_lowerAngle == lowerAngle)
+    if (m_lowerAngle == lowerAngle && m_upperAngle == upperAngle)
         return;
 
     m_lowerAngle = lowerAngle;
     if (revoluteJoint())
         revoluteJoint()->SetLimits(toRadians(lowerAngle),
-                                   m_upperAngle);
-    emit lowerAngleChanged();
-}
-
-void Box2DRevoluteJoint::setUpperAngle(float upperAngle)
-{
-    if (m_upperAngle == upperAngle)
-        return;
-
-    m_upperAngle = upperAngle;
-    if (revoluteJoint())
-        revoluteJoint()->SetLimits(m_lowerAngle,
                                    toRadians(upperAngle));
+    emit lowerAngleChanged();
     emit upperAngleChanged();
 }
+
+//void Box2DRevoluteJoint::setLowerAngle(float lowerAngle)
+//{
+//    if (m_lowerAngle == lowerAngle)
+//        return;
+
+//    m_lowerAngle = lowerAngle;
+//    if (revoluteJoint())
+//        revoluteJoint()->SetLimits(toRadians(lowerAngle),
+//                                   m_upperAngle);
+//    emit lowerAngleChanged();
+//}
+
+//void Box2DRevoluteJoint::setUpperAngle(float upperAngle)
+//{
+//    if (m_upperAngle == upperAngle)
+//        return;
+
+//    m_upperAngle = upperAngle;
+//    if (revoluteJoint())
+//        revoluteJoint()->SetLimits(m_lowerAngle,
+//                                   toRadians(upperAngle));
+//    emit upperAngleChanged();
+//}
 
 void Box2DRevoluteJoint::setEnableMotor(bool enableMotor)
 {
