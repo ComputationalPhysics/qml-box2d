@@ -61,3 +61,9 @@ HEADERS += \
     box2dgearjoint.h \
     box2dropejoint.h \
     box2draycast.h
+
+copydata.commands = $(MKDIR) $$OUT_PWD/Box2D && $(COPY_DIR) $$PWD/qmldir $$OUT_PWD/Box2D && $(COPY_DIR) $$OUT_PWD/libBox2D.so $$OUT_PWD/Box2D
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
